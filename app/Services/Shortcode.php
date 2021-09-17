@@ -43,6 +43,8 @@ class Shortcode {
             'device-type' => false
         ), $atts );
 
+        
+
         if( !$table_args['service'] ) {
 
             global $post;
@@ -54,15 +56,16 @@ class Shortcode {
         } else {
             $args = [
                 'name' => $table_args['service'],
-                'post_type' => 'usluga'
+                'post_type' => 'usluga',
+                'posts_per_page'   => -1,
             ];
-    
+
             $current_service = new \WP_Query( $args );
         }
 
         ob_start();
 
-        include_once WW_ENGINE_DIR . 'app/Views/serviceTable.php';
+        include WW_ENGINE_DIR . 'app/Views/serviceTable.php';
 
         return ob_get_clean();
 
@@ -82,25 +85,44 @@ class Shortcode {
         $current_post_ID = $post->ID;
 
         $args = [
-            'post_type' => 'usluga'
+            'posts_per_page'   => -1,
+            'post_type' => 'usluga',
+            
         ];
 
         $current_service = new \WP_Query( $args );
 
         ob_start();
 
-        include_once WW_ENGINE_DIR . 'app/Views/modelTable.php';
+        include WW_ENGINE_DIR . 'app/Views/modelTable.php';
 
         return ob_get_clean();
 
     }
 
-    public static function renderTableRow( $service_title, $model_title, $service_time, $replacement_price, $original_price ) {
+    public static function renderTableRow( $service_title, $model_title, $service_time, $replacement_price, $original_price, $service_description = false, $post_ID ) {
         ?>
 
         <tr>
             <td>
-                <?php echo $service_title . ' ' . $model_title ?>
+                <div class="ww-service-title">
+
+                    <?php echo '<a class="ww-service-title-link" href="' . get_permalink( $post_ID ) . '">' . $service_title . ' ' . $model_title . '</a>'; ?>
+
+                </div>
+
+                <?php
+
+                    if( $service_description ) {
+                        ?>
+                            <div class="ww-service-description">
+
+                                <?php echo $service_description; ?>
+
+                            </div>
+                        <?php
+                    }
+                ?>
             </td>
             <td>
                 <?php echo $service_time ?>

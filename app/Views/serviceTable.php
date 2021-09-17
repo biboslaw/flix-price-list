@@ -19,7 +19,7 @@
 
                             the_row();
 
-                            self::renderTableRow( get_the_title(), get_the_title( get_sub_field('model_name') ), get_sub_field('repair_time'), get_sub_field('replacemet_part_price'), get_sub_field('original_part_price') );
+                            self::renderTableRow( get_the_title(), get_the_title( get_sub_field('model_name') ), get_sub_field('repair_time'), get_sub_field('replacemet_part_price'), get_sub_field('original_part_price'), get_sub_field('service_description'), get_sub_field('model_name') );
 
                         }
                     }
@@ -42,17 +42,14 @@
 
                                     if( in_array( $table_args['device-type'], $associated_terms_slugs ) ) {
 
-                                        self::renderTableRow( get_the_title(), get_the_title( get_sub_field('model_name') ), get_sub_field('repair_time'), get_sub_field('replacemet_part_price'), get_sub_field('original_part_price') );
+                                        self::renderTableRow( get_the_title(), get_the_title( get_sub_field('model_name') ), get_sub_field('repair_time'), get_sub_field('replacemet_part_price'), get_sub_field('original_part_price'), get_sub_field('service_description'), get_sub_field('model_name') );
 
                                     }
                                 }
                             }
                         }
                     }
-                 }
-
-
-
+                }
             ?>
         </tbody>
     </table>   

@@ -10,6 +10,7 @@
         </thead>
         <tbody>
             <?php
+
                 if( $current_service->have_posts() ) {
                     while( $current_service->have_posts() ) {
                         $current_service->the_post();
@@ -19,24 +20,9 @@
                                 the_row();
 
                                 if( get_sub_field('model_name') === $current_post_ID ) {
-                                    ?>
 
-                                    <tr>
-                                        <td>
-                                            <?php echo get_the_title() . ' ' . get_the_title( $current_post_ID ); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo get_sub_field('repair_time'); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo get_sub_field('replacemet_part_price'); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo get_sub_field('original_part_price'); ?>
-                                        </td>
-                                    </tr>
+                                    self::renderTableRow( get_the_title(), get_the_title( $current_post_ID ), get_sub_field('repair_time'), get_sub_field('replacemet_part_price'), get_sub_field('original_part_price'), get_sub_field('service_description'), get_sub_field('model_name') );
 
-                                    <?php
                                 }
 
                             }
